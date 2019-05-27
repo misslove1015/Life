@@ -1,0 +1,44 @@
+//
+//  Dynamic.pch
+//  Dynamic
+//
+//  Created by 郭明亮 on 2019/5/8.
+//  Copyright © 2019 郭明亮. All rights reserved.
+//
+
+#ifndef Dynamic_pch
+#define Dynamic_pch
+
+#import "YYModel.h"
+#import "UIViewController+MSHUD.h"
+#import "Window.h"
+#import "UIButton+MSWebCache.h"
+#import "UIImageView+MSWebCache.h"
+#import "NSObject+MSAlert.h"
+#import "NSString+Helper.h"
+#import "MJRefresh.h"
+#import "Masonry.h"
+#import "NSString+Helper.h"
+#import "YBImageBrowser.h"
+#import "NetService.h"
+
+#define COLOR(R,G,B) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1]
+
+#define QiNiuURL @"http://image.guomingliang.cn"
+//#define AppURL @"http://localhost:8080"
+#define AppURL @"http://www.guomingliang.cn:8080"
+
+#define WEAK(obj) __weak typeof(obj) obj##Weak = obj
+#define STRONG(obj) __strong typeof(obj) obj = obj##Weak
+
+#define SCREEN_WIDTH UIScreen.mainScreen.bounds.size.width
+#define SCREEN_HEIGHT UIScreen.mainScreen.bounds.size.height
+
+#define IPHONEX (SCREEN_HEIGHT == 812 || SCREEN_HEIGHT == 896)
+#define NAV_HEIGHT (IPHONEX?88:64)
+#define BOTTOM_HEIGHT (IPHONEX?34:0)
+
+#define pageSize 50
+
+
+#endif /* Dynamic_pch */

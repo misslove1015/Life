@@ -1,0 +1,10 @@
+Pods/
+Pods/**
+Podfile.lock
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+

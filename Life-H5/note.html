@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Life</title>
+
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;  
+        }
+
+        #navView {
+            width: 100%;
+            height: 60px;
+            background-color: white;
+        }
+
+        #nav {
+            min-width: 300px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px 0 15px;
+            list-style: none;
+            background-color: white;
+        }
+
+        .navItem {
+            color: black;
+            float: left;
+            min-width: 90px;
+            line-height: 60px;
+            text-align: center;
+            margin-right: 1px;
+        }
+
+        .navItem:hover {
+           cursor: pointer; 
+           background-color: rgb(0, 123, 255);
+           color: white;
+        }
+
+        .navItemSelect {
+            background-color: rgb(0, 123, 255);
+            color: white;
+        }
+
+        #container {
+            min-width: 300px;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-top: 10px;
+            padding: 0 15px 0 15px;
+            white-space: pre-line;
+        }   
+
+        #noteList {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .noteRow {
+            background-color: white;
+            padding: 2px 12px 2px 12px;
+            margin: 0;
+            margin-bottom: 1px;
+        }
+
+        #title {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        #time {
+            font-size: 13px;
+            color: gray;
+        }
+
+        #AQ {
+            text-align: center;
+            margin: 20px;
+            color: gray;
+            font-size: 12px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="main">
+        <div id="navView">
+            <ul id="nav">
+                <li class="navItem" v-for="data in navArray" :class="{navItemSelect:data.select}" @click="navItemClick(data)">{{data.text}}</li>
+            </ul>
+        </div>   
+        
+        <div id="container">
+            <ul id="noteList">
+                <li class="noteRow" v-for="note in listArray">
+                    <p id="title">{{note.title}}</p>
+                    <p id="content">{{note.content}}</p>
+                    <p id="time">{{note.time}}</p>
+                </li>
+            </ul>
+        </div>
+
+        <div id="AQ">
+                <span>©2019 郭明亮 浙ICP备19020148号</span>
+        </div>
+        
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:"#main",
+            data() {
+                return {
+                    navArray:[
+                        {"select":0,
+                         "text":"动态",
+                         "url":"index.html"    
+                        },
+                        {"select":1,
+                         "text":"笔记",
+                         "url":"note.html"   
+                        },
+                        {"select":0,
+                         "text":"相册",
+                         "url":"album.html"    
+                        },
+                    ],
+
+                    listArray: [] 
+                }
+            },
+
+            mounted() {
+                this.getNoteList();
+            },
+
+            methods: {
+                navItemClick:function (data) {
+                    window.location.href = data.url;
+                },
+
+                getNoteList() {
+                    var url = "http://114.55.166.223:8080/noteList";
+                    axios.get(url, {
+                        headers:{"userId":17},
+                        params:{"page":1, "pageSize":999}
+                    })
+                    .then(response => {
+                        this.listArray = response.data.data;
+                    }) 
+                }
+            },
+        })
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,5 @@
+target 'Note' do
+inhibit_all_warnings!
+pod 'AFNetworking', '~> 3.2.1'
+pod 'YYModel', '~> 1.0.4'
+end

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoVC">
+            <connections>
+                <outlet property="collectionView" destination="esn-LU-2TR" id="rYO-ew-NDr"/>
+                <outlet property="deleteViewBottomSpace" destination="Ixw-62-iQP" id="gHX-AV-UHa"/>
+                <outlet property="deleteViewHeight" destination="K9V-MQ-ned" id="hVG-P3-U3Q"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="esn-LU-2TR">
+                    <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tDY-2b-Y2X">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3rM-wx-is4">
+                    <rect key="frame" x="0.0" y="896" width="414" height="74"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QK8-6H-ZkZ">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="0.5"/>
+                            <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.5" id="mA8-ga-Dgg"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AyE-2k-Fdb">
+                            <rect key="frame" x="0.0" y="0.0" width="80" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="9fQ-eo-Ouc"/>
+                                <constraint firstAttribute="height" constant="50" id="YBV-Fo-Vpd"/>
+                            </constraints>
+                            <state key="normal" title="取消"/>
+                            <connections>
+                                <action selector="deleteViewCancel:" destination="-1" eventType="touchUpInside" id="MYf-lB-FyD"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JcR-3M-Xp4">
+                            <rect key="frame" x="334" y="0.0" width="80" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="fvi-FD-Gwo"/>
+                                <constraint firstAttribute="width" constant="80" id="wE2-lY-Kfd"/>
+                            </constraints>
+                            <state key="normal" title="删除"/>
+                            <connections>
+                                <action selector="deleteViewSubmit:" destination="-1" eventType="touchUpInside" id="3Yb-aY-I6N"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="AyE-2k-Fdb" firstAttribute="leading" secondItem="3rM-wx-is4" secondAttribute="leading" id="Cs9-cz-hnE"/>
+                        <constraint firstAttribute="trailing" secondItem="JcR-3M-Xp4" secondAttribute="trailing" id="ITs-0E-pae"/>
+                        <constraint firstAttribute="height" constant="74" id="K9V-MQ-ned"/>
+                        <constraint firstItem="AyE-2k-Fdb" firstAttribute="top" secondItem="3rM-wx-is4" secondAttribute="top" id="WAk-eC-aAH"/>
+                        <constraint firstAttribute="trailing" secondItem="QK8-6H-ZkZ" secondAttribute="trailing" id="m2u-XI-jA9"/>
+                        <constraint firstItem="QK8-6H-ZkZ" firstAttribute="top" secondItem="3rM-wx-is4" secondAttribute="top" id="r8A-JG-fjb"/>
+                        <constraint firstItem="QK8-6H-ZkZ" firstAttribute="leading" secondItem="3rM-wx-is4" secondAttribute="leading" id="uKU-Su-NCq"/>
+                        <constraint firstItem="JcR-3M-Xp4" firstAttribute="top" secondItem="3rM-wx-is4" secondAttribute="top" id="zZ1-F4-y26"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="3rM-wx-is4" firstAttribute="top" secondItem="esn-LU-2TR" secondAttribute="bottom" id="5eb-u2-Jw3"/>
+                <constraint firstItem="3rM-wx-is4" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="HUF-fv-mEA"/>
+                <constraint firstAttribute="bottom" secondItem="3rM-wx-is4" secondAttribute="bottom" constant="-74" id="Ixw-62-iQP"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="esn-LU-2TR" secondAttribute="trailing" id="Nw6-9E-ikd"/>
+                <constraint firstItem="esn-LU-2TR" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="Prz-sC-6jP"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="3rM-wx-is4" secondAttribute="trailing" id="W9Z-5O-Qwo"/>
+                <constraint firstItem="esn-LU-2TR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="sMG-45-epy"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="130.43478260869566" y="152.67857142857142"/>
+        </view>
+    </objects>
+</document>
