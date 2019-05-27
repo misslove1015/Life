@@ -9,6 +9,7 @@
 #import "SettingVC.h"
 #import <WebKit/WebKit.h>
 #import "User.h"
+#import "ChangePasswordVC.h"
 
 @interface SettingVC ()
 
@@ -33,6 +34,10 @@
         [Window login];
     }];
     
+}
+
+- (IBAction)changePassword:(id)sender {
+    [self.navigationController pushViewController:[ChangePasswordVC new] animated:YES];
 }
 
 - (IBAction)clearCache:(id)sender {

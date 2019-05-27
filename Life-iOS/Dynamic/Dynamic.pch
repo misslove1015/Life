@@ -25,8 +25,8 @@
 #define COLOR(R,G,B) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1]
 
 #define QiNiuURL @"http://image.guomingliang.cn"
-//#define AppURL @"http://localhost:8080"
-#define AppURL @"http://www.guomingliang.cn:8080"
+#define AppURL @"http://localhost:8080"
+//#define AppURL @"http://www.guomingliang.cn:8080"
 
 #define WEAK(obj) __weak typeof(obj) obj##Weak = obj
 #define STRONG(obj) __strong typeof(obj) obj = obj##Weak

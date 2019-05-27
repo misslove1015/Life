@@ -11,6 +11,7 @@
 
 #define loginURL @"login"
 #define registerURL @"register"
+#define changePasswordURL @"changePassword"
 #define postURL @"post"
 #define dynamicListURL @"dynamicList"
 #define deleteDynamicURL @"deleteDynamic"
@@ -66,6 +67,18 @@
     [param setValue:userName forKey:@"userName"];
     [param setValue:password forKey:@"password"];
     [self requestWithURL:registerURL paramDic:param complete:complete];
+}
+
+// 更改密码
+- (void)changePasswordWithUserName:(NSString *)userName
+                          password:(NSString *)password
+                       newPassword:(NSString *)newpassword
+                          complete:(void(^)(NetResponseModel *responseModel))complete {
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    [param setValue:userName forKey:@"userName"];
+    [param setValue:password forKey:@"password"];
+    [param setValue:newpassword forKey:@"newPassword"];
+    [self requestWithURL:changePasswordURL paramDic:param complete:complete];
 }
 
 // 发布动态

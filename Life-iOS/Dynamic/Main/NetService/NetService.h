@@ -21,6 +21,12 @@
                     password:(NSString *)password
                     complete:(void(^)(NetResponseModel *responseModel))complete;
 
+// 更改密码
+- (void)changePasswordWithUserName:(NSString *)userName
+                          password:(NSString *)password
+                       newPassword:(NSString *)newpassword
+                          complete:(void(^)(NetResponseModel *responseModel))complete;
+
 // 发布动态
 - (void)postWithText:(NSString *)text
            longitude:(NSString *)longitude

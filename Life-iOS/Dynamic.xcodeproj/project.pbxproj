@@ -79,6 +79,8 @@
 		4C808A522297880100E12695 /* MSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C808A502297880100E12695 /* MSWebViewController.m */; };
 		4C808A562297954500E12695 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C808A542297954500E12695 /* SettingVC.m */; };
 		4C808A572297954500E12695 /* SettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C808A552297954500E12695 /* SettingVC.xib */; };
+		4CC543AA229BB2E100D929CB /* ChangePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC543A8229BB2E100D929CB /* ChangePasswordVC.m */; };
+		4CC543AB229BB2E100D929CB /* ChangePasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC543A9229BB2E100D929CB /* ChangePasswordVC.xib */; };
 		4CDE2D8E2285183B00274068 /* DetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDE2D8C2285183B00274068 /* DetailVC.m */; };
 		4CDE2D8F2285183B00274068 /* DetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CDE2D8D2285183B00274068 /* DetailVC.xib */; };
 		4CECA8FC228A6AD0007DD3D6 /* UIImage+Exit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CECA8FA228A6AD0007DD3D6 /* UIImage+Exit.m */; };
@@ -209,6 +211,9 @@
 		4C808A532297954500E12695 /* SettingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
 		4C808A542297954500E12695 /* SettingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
 		4C808A552297954500E12695 /* SettingVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingVC.xib; sourceTree = "<group>"; };
+		4CC543A7229BB2E100D929CB /* ChangePasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePasswordVC.h; sourceTree = "<group>"; };
+		4CC543A8229BB2E100D929CB /* ChangePasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordVC.m; sourceTree = "<group>"; };
+		4CC543A9229BB2E100D929CB /* ChangePasswordVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordVC.xib; sourceTree = "<group>"; };
 		4CDE2D8B2285183B00274068 /* DetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailVC.h; sourceTree = "<group>"; };
 		4CDE2D8C2285183B00274068 /* DetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailVC.m; sourceTree = "<group>"; };
 		4CDE2D8D2285183B00274068 /* DetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailVC.xib; sourceTree = "<group>"; };
@@ -400,6 +405,9 @@
 				4C808A552297954500E12695 /* SettingVC.xib */,
 				4C808A512297880100E12695 /* MSWebViewController.h */,
 				4C808A502297880100E12695 /* MSWebViewController.m */,
+				4CC543A7229BB2E100D929CB /* ChangePasswordVC.h */,
+				4CC543A8229BB2E100D929CB /* ChangePasswordVC.m */,
+				4CC543A9229BB2E100D929CB /* ChangePasswordVC.xib */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -721,6 +729,7 @@
 				4C03B78D22840B2800FDA1A4 /* DynamicCell.xib in Resources */,
 				4C40E4AB228E9D9C00B3DBA1 /* NoteCell.xib in Resources */,
 				4C40E4CE228EE34D00B3DBA1 /* PhotoCell.xib in Resources */,
+				4CC543AB229BB2E100D929CB /* ChangePasswordVC.xib in Resources */,
 				4C808A572297954500E12695 /* SettingVC.xib in Resources */,
 				4C03B72722826DC500FDA1A4 /* LaunchScreen.storyboard in Resources */,
 				4C03B7772283D7F900FDA1A4 /* PostVC.xib in Resources */,
@@ -835,6 +844,7 @@
 				4C03B73A22826EED00FDA1A4 /* LoginVC.m in Sources */,
 				4C03B74422826F5500FDA1A4 /* DynamicVC.m in Sources */,
 				4C40E4C1228E9F8000B3DBA1 /* AlbumModel.m in Sources */,
+				4CC543AA229BB2E100D929CB /* ChangePasswordVC.m in Sources */,
 				4C03B7822283FC4900FDA1A4 /* NSObject+MSAlert.m in Sources */,
 				4C40E4C4228E9F8800B3DBA1 /* PhotoModel.m in Sources */,
 				4C40E4AA228E9D9C00B3DBA1 /* NoteCell.m in Sources */,
