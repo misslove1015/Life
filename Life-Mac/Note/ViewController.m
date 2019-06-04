@@ -64,6 +64,7 @@
         [self.indicatorView stopAnimation:nil];
         self.dataArray = [NSArray yy_modelArrayWithClass:NoteModel.class json:responseModel.data];
         [self.tableView reloadData];
+        if (self.dataArray.count == 0) return;
         if (self.isNeedSelect) {
             self.isNeedSelect = NO;
             if (self.lastSelectRow < self.dataArray.count) {
