@@ -21,7 +21,7 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
 
-    [manager.requestSerializer setValue:@"17" forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:@"29" forHTTPHeaderField:@"userId"];
     
     url = [NSString stringWithFormat:@"%@/%@", AppURL, url];
 #ifdef DEBUG
@@ -51,7 +51,7 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     
-    [manager.requestSerializer setValue:@"17" forHTTPHeaderField:@"userId"];
+    [manager.requestSerializer setValue:@"29" forHTTPHeaderField:@"userId"];
     
     url = [NSString stringWithFormat:@"%@/%@", AppURL, url];
 #ifdef DEBUG

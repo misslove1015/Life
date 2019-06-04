@@ -137,10 +137,10 @@
                 },
 
                 getPhotoList() {
-                    var url = "http://114.55.166.223:8080/photoList";
+                    var url = "http://www.guomingliang.cn:8080/photoList";
                     var request = this.getRequest();
                     axios.get(url, {
-                        headers:{userId:17},
+                        headers:{userId:29},
                         params:{"albumId":request["albumId"], "page":1, "pageSize":999},
                     })
                     .then(response => {
