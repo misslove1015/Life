@@ -128,6 +128,11 @@
             color: gray;
         }
 
+        #locationName:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
         #AQ {
             text-align: center;
             margin: 20px;
@@ -161,8 +166,8 @@
                         <img class="dynamicImage" v-for="url in dynamic.images" :src="url+'?imageView2/2/w/400'" @click="showBigImageWithURL(url)">
                     </div>
                     <div id="locationView" v-if="dynamic.location.locationName">
-                        <img id="locationImage" src="http://pr84naemb.bkt.clouddn.com/Fq9d2N30BJhzurbviaSkTZEpRuqC" v-img-preview>
-                        <span id="locationName">{{dynamic.location.locationName}}</span>
+                        <img id="locationImage" src="http://image.guomingliang.cn/Fq9d2N30BJhzurbviaSkTZEpRuqC" v-img-preview>
+                        <span id="locationName" @click="clickLocationName(dynamic.location)">{{dynamic.location.locationName}}</span>
                     </div> 
                 </li>
             </ul>
@@ -216,6 +221,11 @@
                     .then(response => {
                         this.listArray = response.data.data;
                     }) 
+                },
+
+                clickLocationName(location) {
+                    let url = "https://uri.amap.com/marker?position="+location.longitude+","+location.latitude+"&name="+location.locationName
+                    window.open(url)
                 },
 
                 showBigImageWithURL:function(url) {                    
