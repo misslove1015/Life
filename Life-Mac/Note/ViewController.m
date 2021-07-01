@@ -24,6 +24,8 @@
 @property (strong) NoteModel *note;
 @property (assign) NSInteger lastSelectRow;
 @property (assign) BOOL isNeedSelect;
+@property (copy) NSString *lastTitleString;
+@property (copy) NSString *lastContentString;
 
 @end
 
@@ -49,6 +51,8 @@
         [weakSelf deleteRow:row];
     };
     
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(appResignActive) name:NSApplicationDidResignActiveNotification object:nil];
+    
 }
 
 - (void)viewWillAppear {
@@ -56,6 +60,10 @@
     self.view.window.restorable = NO;
     [self.view.window setContentSize:NSMakeSize(800, 600)];
 
+}
+
+- (void)appResignActive {
+    [self save:nil];
 }
 
 - (void)getNoteList {
@@ -94,6 +102,7 @@
     self.note = nil;
     self.titleLabel.stringValue = @"";
     self.textView.string = @"";
+    [self synchronizationString];
 
     [self.titleLabel becomeFirstResponder];
 }
@@ -101,6 +110,9 @@
 - (IBAction)save:(id)sender {
     if (self.titleLabel.stringValue.length == 0 &&
         self.textView.string.length == 0) return;
+    if ([self.titleLabel.stringValue isEqualToString:self.lastTitleString] && [self.textView.string isEqualToString:self.lastContentString]) return;
+    
+    [self synchronizationString];
     
     [self saveRequest];
     if (self.note.id) {
@@ -160,7 +172,13 @@
     self.textView.string = note.content;
     self.note = note;
     self.lastSelectRow = row;
+    [self synchronizationString];
     return YES;
+}
+
+- (void)synchronizationString {
+    self.lastTitleString = self.titleLabel.stringValue;
+    self.lastContentString = self.textView.string;
 }
 
 - (void)setRepresentedObject:(id)representedObject {

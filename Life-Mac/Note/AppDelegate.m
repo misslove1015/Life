@@ -27,6 +27,10 @@
     // Insert code here to tear down your application
 }
 
+- (void)applicationWillResignActive:(NSNotification *)notification {
+    NSLog(@"Resign");
+}
+
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag {
     [self.mainWindowVC.window makeKeyAndOrderFront:nil];
     return YES;

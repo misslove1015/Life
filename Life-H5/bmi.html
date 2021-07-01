@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" type="text/css" href="css/life.css"/>
+    <title>Life-BMI</title>
+
+    <style type="text/css">
+        #textNav {
+            color: black;
+            background-color: #f5f5f5;
+            height: 30px;
+            padding-left: 5px;            
+        }
+
+        #bmiView {
+            display: flex;
+            display: -webkit-flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+        }
+
+        #heightInput, #weightInput, #submitButton {
+            height: 40px;
+            width: 200px;
+            border: solid;
+            border-color: #E1E1E1;
+            border-radius: 3px;
+            border-width: 0.5px;
+            color: #333333;
+            margin-top: 15px;
+            height: 40px;
+            font-size: 16px;
+            text-align: center;
+            background: none;
+            outline: none;
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+        }
+
+        #submitButton {
+            height: 45px;
+            width: 210px;
+            border: none;
+            background-color: rgb(0, 123, 255);
+            color: white;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        #submitButton:hover {
+            background-color: rgb(6, 93, 186);
+        }
+
+        #resultText {
+            color: green;
+            font-size: 30px;
+            margin-top: 20px;
+        }
+
+        #standardView {
+            border: solid;
+            border-color: #E1E1E1;
+            border-radius: 3px;
+            border-width: 0.5px;
+            font-size: 15px;
+            padding: 10px 20px 10px 20px;
+            color: #666666;
+            background-color: #f5f5f5;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .resultText {
+            color: #333333;
+            margin-top: 10px;
+        }
+
+        a:visited, a:link, a:hover, a:active {
+            color: rgb(0, 123, 255);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main">
+        <div id="navView">
+            <ul id="nav">
+                <li class="navItem" v-for="data in navArray" :class="{navItemSelect:data.select}" @click="navItemClick(data)">{{data.text}}</li>
+            </ul>
+        </div>   
+
+        <div id="container">
+            <div id="textNav">
+                <div><a href="other.html">其他</a> / BMI</div>
+            </div>
+            <div id="bmiView">
+                <input id="heightInput" type="text" placeholder="请输入身高（cm）" v-model="height">
+                <input id="weightInput" type="text" placeholder="请输入体重（kg）" v-model="weight">
+                <button id="submitButton" @click="calculate()">计算</button>
+                <div id="resultText">{{resultText}}</div>
+                <div id="resultView">
+                    <div id="yourBMI" class="resultText">你的BMI：{{yourBMI}}</div>
+                    <div id="normalWeight" class="resultText">正常体重：{{normalWeight}}</div>
+                    <div id="bestWeight" class="resultText">最佳体重：{{bestWeight}}</div>                    
+                </div>                
+                <div id="standardView">BMI = 体重/(身高*身高)<br />偏瘦：< 18.5<br />正常：18.5 ~ 23.9<br />偏胖：24 ~ 27.9<br />肥胖：>= 28</div>
+            </div>
+        </div>
+
+        <div id="AQ">
+            <span>©2019 郭明亮 <a id="icp" href="http://beian.miit.gov.cn/" target="_blank">浙ICP备19020148号</a></span>
+        </div>
+        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="js/axios.min.js"></script>
+    <script>
+        var vm = new Vue({
+            el:"#main",
+            data() {
+                return {
+                    navArray:[
+                        {"select":0,
+                         "text":"动态",
+                         "url":"index.html"    
+                        },
+                        {"select":0,
+                         "text":"笔记",
+                         "url":"note.html"   
+                        },
+                        {"select":0,
+                         "text":"相册",
+                         "url":"album.html"    
+                        },
+                        {"select":1,
+                         "text":"其他",
+                         "url":"other.html"    
+                        },
+                    ],
+
+                    listArray: [
+                        
+                    ],
+                    
+                    height:"170",
+                    weight:"68",
+                    resultText:"正常",	
+                    normalWeight:"47.4 ~ 61.4kg",
+                    bestWeight:"53.6kg",
+                    yourBMI:"27.3"				
+                }
+            },
+
+            mounted() {
+                this.calculate()
+                this.requestWeightList()
+            },
+
+            methods: {
+                navItemClick:function (data) {
+                    window.location.href = data.url;
+                },
+                requestWeightList() {
+                    let that = this
+                    let url = "http://www.guomingliang.cn:8080/weightList";
+                    axios.get(url, {
+                                              
+                    })
+                    .then(response => {           
+                        let listArray = response.data.data             
+                        that.weight = listArray[listArray.length-1]["weight"]
+                        that.calculate()
+                    })
+                },
+                calculate() {
+                    let bmi = (this.weight / (this.height * this.height / 10000)) . toFixed(1)
+                    let resultText = document.getElementById("resultText");
+                    this.normalWeight = (18.5*this.height*this.height/10000).toFixed(1) + " ~ " + (24.0*this.height*this.height/10000).toFixed(1) + "kg"
+                    this.bestWeight = (22.0*this.height*this.height/10000).toFixed(1) + "kg"
+                    this.yourBMI = bmi
+                    if (bmi < 18.5) {
+                        this.resultText = "偏瘦"
+                        resultText.style.color = "orange"
+                    }else if (bmi < 24) {
+                        this.resultText = "正常"
+                        resultText.style.color = "green"
+                    }else if (bmi < 28) {
+                        this.resultText = "偏胖"
+                        resultText.style.color = "orange"
+                    }else {
+                        this.resultText = "肥胖"
+                        resultText.style.color = "red"
+                    }
+                }
+            },
+        })
+    </script>
+    
+</body>
+</html>

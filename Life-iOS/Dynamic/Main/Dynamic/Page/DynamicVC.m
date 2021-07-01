@@ -106,6 +106,7 @@ static NSString * const identifier = @"cell";
     YBImageBrowser *browser = [YBImageBrowser new];
     browser.dataSourceArray = dataArray;
     browser.currentIndex = index;
+    browser.enterTransitionType = browser.outTransitionType = YBImageBrowserTransitionTypeFade;
     [browser show];
 }
 

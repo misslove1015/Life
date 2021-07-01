@@ -26,12 +26,18 @@ Dynamic {
 	public HashMap<String, Object> getDynamic(HttpServletRequest request) throws Exception {
 		String userId = request.getHeader("userId");
 		if (userId == null || userId.length() == 0) {
-			return ReturnMap.errorMap(ServiceCode.Error_NotLogin.getCode(), ServiceCode.Error_NotLogin.getDesc());
+			userId = "29";
 		}
-		int page = Integer.parseInt(request.getParameter("page"));
-		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
-		if (page == 0) page = 1;
-		if (pageSize == 0) pageSize = 50;
+		int page = 1;
+		int pageSize = Integer.MAX_VALUE;
+		String pageValue = request.getParameter("page");
+		if (pageValue != null) {
+			page = Integer.parseInt(pageValue);
+		}
+		String pageSizeValue = request.getParameter("pageSize");
+		if (pageSizeValue != null) {
+			pageSize = Integer.parseInt(pageSizeValue);
+		}
 
 		DatabaseManager manager = new DatabaseManager();
 		// 从用户表获取最新的名字和头像

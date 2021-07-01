@@ -57,15 +57,21 @@ public class Photo {
 	public HashMap<String, Object> albumList (HttpServletRequest request) throws Exception {
 		String userId = request.getHeader("userId");
 		if (userId == null || userId.length() == 0) {
-			return ReturnMap.errorMap(ServiceCode.Error_NotLogin.getCode(), ServiceCode.Error_NotLogin.getDesc());
+			userId = "29";
+		}
+
+		int page = 1;
+		int pageSize = Integer.MAX_VALUE;
+		String pageValue = request.getParameter("page");
+		if (pageValue != null) {
+			page = Integer.parseInt(pageValue);
+		}
+		String pageSizeValue = request.getParameter("pageSize");
+		if (pageSizeValue != null) {
+			pageSize = Integer.parseInt(pageSizeValue);
 		}
 
 		DatabaseManager manager = new DatabaseManager();
-		int page = Integer.parseInt(request.getParameter("page"));
-		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
-		if (page == 0) page = 1;
-		if (pageSize == 0) pageSize = 50;
-
 		String sql = "SELECT * FROM album WHERE userId=? AND active=1 ORDER BY id DESC LIMIT ?,?";
 		Object[] data = new Object[3];
 		data[0] = Integer.parseInt(userId);
@@ -139,18 +145,24 @@ public class Photo {
 		String albumId = request.getParameter("albumId");
 		String userId = request.getHeader("userId");
 		if (userId == null || userId.length() == 0) {
-			return ReturnMap.errorMap(ServiceCode.Error_NotLogin.getCode(), ServiceCode.Error_NotLogin.getDesc());
+			userId = "29";
 		}
 		if (albumId == null || albumId.length() == 0) {
 			return ReturnMap.errorMap(ServiceCode.Error_ParamNull.getCode(), "相册id不能为空");
 		}
 
-		DatabaseManager manager = new DatabaseManager();
-		int page = Integer.parseInt(request.getParameter("page"));
-		int pageSize = Integer.parseInt(request.getParameter("pageSize"));
-		if (page == 0) page = 1;
-		if (pageSize == 0) pageSize = 50;
+		int page = 1;
+		int pageSize = Integer.MAX_VALUE;
+		String pageValue = request.getParameter("page");
+		if (pageValue != null) {
+			page = Integer.parseInt(pageValue);
+		}
+		String pageSizeValue = request.getParameter("pageSize");
+		if (pageSizeValue != null) {
+			pageSize = Integer.parseInt(pageSizeValue);
+		}
 
+		DatabaseManager manager = new DatabaseManager();
 		String sql = "SELECT * FROM photo WHERE albumId=? AND userId=? AND active=1 ORDER BY id DESC LIMIT ?,?";
 		Object[] data = new Object[4];
 		data[0] = Integer.parseInt(albumId);

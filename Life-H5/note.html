@@ -4,90 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <title>Life</title>
+	<link rel="stylesheet" type="text/css" href="css/life.css"/>
+    <title>Life-笔记</title>
 
-    <style type="text/css">
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;  
-        }
-
-        #navView {
-            width: 100%;
-            height: 60px;
-            background-color: white;
-        }
-
-        #nav {
-            min-width: 300px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px 0 15px;
-            list-style: none;
-            background-color: white;
-        }
-
-        .navItem {
-            color: black;
-            float: left;
-            min-width: 90px;
-            line-height: 60px;
-            text-align: center;
-            margin-right: 1px;
-        }
-
-        .navItem:hover {
-           cursor: pointer; 
-           background-color: rgb(0, 123, 255);
-           color: white;
-        }
-
-        .navItemSelect {
-            background-color: rgb(0, 123, 255);
-            color: white;
-        }
-
-        #container {
-            min-width: 300px;
-            max-width: 1200px;
-            margin: 0 auto;
-            margin-top: 10px;
-            padding: 0 15px 0 15px;
-            white-space: pre-line;
-        }   
-
-        #noteList {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .noteRow {
-            background-color: white;
-            padding: 2px 12px 2px 12px;
-            margin: 0;
-            margin-bottom: 1px;
-        }
+    <style type="text/css">		 
+		#note-nav {
+			width: 200px;
+			height: 700px;
+			float: left;
+			background-color: white;
+			overflow-y:scroll;
+		}
+		 
+		#detail {
+			overflow: auto;
+            max-height: 700px;
+			background-color: white;
+			border-left: #f5f5f5 solid 0.5px;
+			padding: 5px 10px 5px 10px;
+		}
+		
+		.note-nav-li {
+			list-style: none;
+			padding: 1px 5px 1px 8px;
+			border-bottom: #f5f5f5 solid 0.5px;
+		}
+		
+		.note-nav-li-select {
+			background-color: rgb(0, 123, 255);
+			color: white;
+		}
+		
+		.note-nav-li:hover {
+			background-color: rgb(0, 123, 255);
+			cursor: pointer;
+			color: white;
+		}
+		
+		#nav-content {
+			-webkit-line-clamp: 2;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			margin-top: -10px;
+			font-size: 14px;
+		}  
+		
+		#nav-title {
+			font-weight: bold;
+			font-size: 16px;
+			margin-top: 8px;
+		}
+		
+		#nav-time {
+			font-size: 10px;
+			color: lightgray;
+			margin-top: -10px;
+		}
 
         #title {
             font-weight: bold;
-            font-size: 18px;
+            font-size: 16px;
         }
-
-        #time {
-            font-size: 13px;
-            color: gray;
-        }
-
-        #AQ {
-            text-align: center;
-            margin: 20px;
-            color: gray;
-            font-size: 12px;
-        }
+		
+		#content {
+			white-space: pre-line;
+		}
 
     </style>
 </head>
@@ -101,21 +84,27 @@
         </div>   
         
         <div id="container">
-            <ul id="noteList">
-                <li class="noteRow" v-for="note in listArray">
-                    <p id="title">{{note.title}}</p>
-                    <p id="content">{{note.content}}</p>
-                    <p id="time">{{note.time}}</p>
-                </li>
-            </ul>
+			<div id="note-nav">
+				<li class="note-nav-li" v-for="note in listArray" :class="{navItemSelect:note.select}" @click="noteNavClick(note)">
+					 <p id="nav-title">{{note.title}}</p>
+					 <p id="nav-content">{{note.content}}</p>
+					 <p id="nav-time">{{note.time}}</p>
+				</li>
+            </div>
+			<div id="detail">
+				<p id="title">{{note.title}}</p>
+				<p id="content">{{note.content}}</p>
+			</div>         
         </div>
 
         <div id="AQ">
-                <span>©2019 郭明亮 浙ICP备19020148号</span>
+            <span>©2019 郭明亮 <a id="icp" href="http://beian.miit.gov.cn/" target="_blank">浙ICP备19020148号</a></span>
         </div>
         
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="js/axios.min.js"></script>
     <script>
         var vm = new Vue({
             el:"#main",
@@ -134,9 +123,14 @@
                          "text":"相册",
                          "url":"album.html"    
                         },
+                        {"select":0,
+                         "text":"其他",
+                         "url":"other.html"    
+                        },
                     ],
 
-                    listArray: [] 
+                    listArray: [] ,
+					note: {}
                 }
             },
 
@@ -148,15 +142,23 @@
                 navItemClick:function (data) {
                     window.location.href = data.url;
                 },
-
+				
+				noteNavClick:function (note) {
+					this.note.select = 0
+					note.select = 1
+					this.note = note
+					document.getElementById("detail").scrollTo(0, 0)
+                    scrollTo(0, 0)
+				},
+				
                 getNoteList() {
                     var url = "http://www.guomingliang.cn:8080/noteList";
                     axios.get(url, {
-                        headers:{"userId":29},
-                        params:{"page":1, "pageSize":999}
+                        
                     })
                     .then(response => {
-                        this.listArray = response.data.data;
+                        this.listArray = response.data.data
+						this.noteNavClick(this.listArray[0])
                     }) 
                 }
             },
